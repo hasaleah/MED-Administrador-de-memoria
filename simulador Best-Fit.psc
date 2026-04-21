@@ -1,5 +1,5 @@
 Algoritmo SimulacionBestFit
-    // Simulación de Administración de Memoria con Best-Fit
+    // SimulaciÃ³n de AdministraciÃ³n de Memoria con Best-Fit
     // Memoria total 600 unidades
     
     Definir max_procesos Como Entero
@@ -30,21 +30,21 @@ Algoritmo SimulacionBestFit
     
     Repetir
         Escribir ""
-        Escribir "-*-*-*-*-*-*-* MENÚ PRINCIPAL -*-*-*-*-*-*-*-"
+        Escribir "-*-*-*-*-*-*-* MENÃš PRINCIPAL -*-*-*-*-*-*-*-"
         Escribir "1. Mostrar estado actual de la memoria"
         Escribir "2. Cargar nuevo proceso (Best-Fit)"
         Escribir "3. Liberar proceso"
         Escribir "4. Compactar memoria"
         Escribir "5. Salir"
         Escribir "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"
-        Escribir Sin Saltar "Seleccione una opción: "
+        Escribir Sin Saltar "Seleccione una opciÃ³n: "
         Leer opcion
         
         Segun opcion Hacer
             Caso 1:
                 Escribir ""
                 Escribir "-*-*-* ESTADO ACTUAL DE LA MEMORIA -*-*-*-"
-                Escribir "Inicio  Tamaño  Estado    Proceso"
+                Escribir "Inicio  TamaÃ±o  Estado    Proceso"
                 Escribir "------  ------  ------    -------"
                 Para i <- 1 Hasta num_bloques Hacer
                     Si estado_bloque[i] = 0 Entonces
@@ -59,10 +59,10 @@ Algoritmo SimulacionBestFit
                 //cargar nuevo proceso con bestfit
                 Escribir Sin Saltar "Ingrese ID del proceso (entero): "
                 Leer id_proceso
-                Escribir Sin Saltar "Ingrese tamaño del proceso: "
+                Escribir Sin Saltar "Ingrese tamaÃ±o del proceso: "
                 Leer tamanio_proceso
                 
-                //buscar el bloque libre más pequeño que sea suficiente
+                //buscar el bloque libre mÃ¡s pequeÃ±o que sea suficiente
                 mejor_idx <- -1
                 mejor_tamanio <- 999999
                 
@@ -86,7 +86,7 @@ Algoritmo SimulacionBestFit
                         id_proceso_bloque[mejor_idx] <- id_proceso
                         Escribir "Proceso P", id_proceso, " asignado exactamente en el bloque [", inicio_bloque[mejor_idx], "]"
                     Sino
-                        //insertar nuevo bloque después del actual
+                        //insertar nuevo bloque despuÃ©s del actual
                         Para j <- num_bloques Hasta mejor_idx+1 Con Paso -1 Hacer
                             inicio_bloque[j+1] <- inicio_bloque[j]
                             tamanio_bloque[j+1] <- tamanio_bloque[j]
@@ -108,7 +108,7 @@ Algoritmo SimulacionBestFit
                         num_bloques <- num_bloques + 1
                         Escribir "Proceso P", id_proceso, " asignado en [", inicio_bloque[mejor_idx], "] con bloque residual libre de ", tamanio_bloque[mejor_idx+1]
                     FinSi
-                    Escribir "Asignación exitosa usando Best-Fit."
+                    Escribir "AsignaciÃ³n exitosa usando Best-Fit."
                 FinSi
                 
             Caso 3:
@@ -124,11 +124,11 @@ Algoritmo SimulacionBestFit
                         encontrado <- 1
                         Escribir "Proceso P", id_proceso, " liberado del bloque en [", inicio_bloque[i], "]"
                         
-                        //compactación automática de bloques libres adyacentes
+                        //compactaciÃ³n automÃ¡tica de bloques libres adyacentes
                         //unir con bloque libre siguiente si existe
                         Si i < num_bloques Y estado_bloque[i+1] = 0 Entonces
                             tamanio_bloque[i] <- tamanio_bloque[i] + tamanio_bloque[i+1]
-                            //desplazar bloques siguientes hacia atrás
+                            //desplazar bloques siguientes hacia atrÃ¡s
                             Para j <- i+1 Hasta num_bloques-1 Hacer
                                 inicio_bloque[j] <- inicio_bloque[j+1]
                                 tamanio_bloque[j] <- tamanio_bloque[j+1]
@@ -142,7 +142,7 @@ Algoritmo SimulacionBestFit
                         //unir con bloque libre anterior si existe
                         Si i > 1 Y estado_bloque[i-1] = 0 Entonces
                             tamanio_bloque[i-1] <- tamanio_bloque[i-1] + tamanio_bloque[i]
-                            //desplazar bloques siguientes hacia atrás
+                            //desplazar bloques siguientes hacia atrÃ¡s
                             Para j <- i Hasta num_bloques-1 Hacer
                                 inicio_bloque[j] <- inicio_bloque[j+1]
                                 tamanio_bloque[j] <- tamanio_bloque[j+1]
@@ -158,12 +158,12 @@ Algoritmo SimulacionBestFit
                 FinPara
                 
                 Si encontrado = 0 Entonces
-                    Escribir "ERROR: No se encontró el proceso P", id_proceso, " en memoria."
+                    Escribir "ERROR: No se encontrÃ³ el proceso P", id_proceso, " en memoria."
                 FinSi
                 
             Caso 4:
                 // Compactar memoria: mover todos los bloques ocupados al inicio
-                Escribir "Iniciando compactación de memoria..."
+                Escribir "Iniciando compactaciÃ³n de memoria..."
                 
                 Definir nuevo_inicio Como Entero
                 Definir temp_inicio, temp_tamanio, temp_estado, temp_id Como Entero
@@ -201,15 +201,15 @@ Algoritmo SimulacionBestFit
                     id_proceso_bloque[i] <- temp_id[i]
                 FinPara
                 
-                Escribir "Compactación completada. Memoria libre contigua: ", 600 - nuevo_inicio, " unidades."
-                Escribir "Fragmentación externa eliminada."
+                Escribir "CompactaciÃ³n completada. Memoria libre contigua: ", 600 - nuevo_inicio, " unidades."
+                Escribir "FragmentaciÃ³n externa eliminada."
                 
             Caso 5:
                 salir <- 1
                 Escribir "Saliendo del simulador..."
                 
             De Otro Modo:
-                Escribir "Opción no válida. Intente de nuevo."
+                Escribir "OpciÃ³n no vÃ¡lida. Intente de nuevo."
         FinSegun
         
     Hasta Que salir = 1
