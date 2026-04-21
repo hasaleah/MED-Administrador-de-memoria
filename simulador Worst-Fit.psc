@@ -42,7 +42,7 @@ Algoritmo SimulacionWorstFit
             Caso 1:
                 Escribir ""
                 Escribir "-*-*- ESTADO ACTUAL DE LA MEMORIA -*-*-"
-                Escribir "Inicio  Tamaño  Estado    Proceso"
+                Escribir "Inicio  TamaÃ±o  Estado    Proceso"
                 Escribir "------  ------  ------    -------"
                 Para i <- 1 Hasta num_bloques Hacer
                     Si estado_bloque[i] = 0 Entonces
@@ -57,7 +57,7 @@ Algoritmo SimulacionWorstFit
                 //cargar nuevo proceso usando algoritmo worst-fit
                 Escribir Sin Saltar "Ingrese ID del proceso (entero): "
                 Leer id_proceso
-                Escribir Sin Saltar "Ingrese tamaño del proceso: "
+                Escribir Sin Saltar "Ingrese tamaÃ±o del proceso: "
                 Leer tamanio_proceso
                 
                 //inicializar variables para la busqueda worst-fit
