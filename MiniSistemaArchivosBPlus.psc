@@ -1,10 +1,5 @@
 Proceso MiniSistemaArchivosBPlus
 	
-    // ============================================
-    // Mini Sistema de Archivos con Árbol B+
-    // Simulación conceptual en PSeInt
-    // ============================================
-	
     Definir archivos Como Cadena
     Dimension archivos[20]
 	
