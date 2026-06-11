@@ -1,67 +1,126 @@
-# Simuladores de Administración de Memoria con Particiones Variables
+# Proyecto Final
 
-Proyecto académico que implementa y documenta tres algoritmos clásicos de administración de memoria con particiones variables: **First-Fit**, **Best-Fit** y **Worst-Fit**. Incluye simuladores interactivos en PSeInt y documentación teórica con análisis y diagramas de lista enlazada.
+**Universidad de El Salvador**  
+**Asignatura:** Manejo de Estructura de Datos  
+**Docente:** Ing./MEd. Luis Alberto Herrera Mejía  
 
-
-## Simuladores (PSeInt)
-
-Cada simulador es un programa **interactivo y genérico**: el usuario puede definir sus propios procesos con cualquier nombre e ID y tamaño, asignarlos y liberarlos libremente sobre una memoria configurable. No están limitados a ningún conjunto fijo de procesos.
-
-### Funcionalidades comunes
-
-
-| Opción | Descripción |
-|--------|-------------|
-| 1 | Muestra la tabla de bloques con inicio, tamaño, estado y proceso asignado |
-| 2 | Solicita ID y tamaño del proceso, aplica el algoritmo correspondiente |
-| 3 | Libera un proceso por ID y fusiona automáticamente bloques libres adyacentes |
-| 4 | Compacta la memoria moviendo todos los bloques ocupados al inicio |
-| 5 | Sale del simulador |
-
-### Cómo se representa la memoria
-
-La memoria se modela como una **lista enlazada** de bloques. Cada bloque almacena:
-
-- `inicio` — dirección de inicio del bloque
-- `tamaño` — cantidad de unidades que ocupa
-- `estado` — `0 = Libre` / `1 = Ocupado`
-- `id_proceso` — identificador del proceso asignado (0 si está libre)
-
+## Integrantes
+| Nombre | Carnet |
+|--------|-------|
+| Catherine Andrea Argumedo | AB25013 |
+| Jefry Odir Brizuela Rivas | BR25004 |
+| José Adalberto Díaz Lue | DL25004 |
+| Edwin Eduardo Torres Pérez | TP21002|
 
 ---
 
-## Descripción de los algoritmos
+## Contenido del repositorio
 
-### ✿ First-Fit
-Recorre la lista desde el inicio y asigna el proceso al **primer bloque libre** que sea suficientemente grande. Es el más rápido porque detiene la búsqueda en cuanto encuentra un espacio adecuado.
+Este repositorio contiene dos casos de estudio independientes desarrollados como parte del proyecto final de la asignatura. Cada uno explora una estructura de datos distinta aplicada a un problema real de sistemas operativos.
 
-### ✿ Best-Fit
-Recorre **toda la lista** y asigna el proceso al bloque libre **más pequeño que sea suficiente**. Minimiza el desperdicio inmediato por asignación, pero puede generar residuos muy pequeños difíciles de reutilizar.
-
-### ✿ Worst-Fit
-Recorre **toda la lista** y asigna el proceso al bloque libre **más grande disponible**. Busca que el residuo resultante sea lo suficientemente grande para alojar procesos futuros.
-
-### Comparativa
-
-| Aspecto | First-Fit | Best-Fit | Worst-Fit |
-|---|---|---|---|
-| Criterio | Primer bloque suficiente | Bloque más pequeño suficiente | Bloque más grande disponible |
-| Velocidad de búsqueda | Rápida | Lenta | Lenta |
-| Fragmentación generada | Bloques medianos residuales | Residuos muy pequeños | Residuos más grandes |
-| Principal ventaja | Velocidad | Menor desperdicio inmediato | Residuos más reutilizables |
-| Principal desventaja | Puede saltarse bloques óptimos | Residuos inutilizables | Agota bloques grandes rápido |
+```
+/
+├── caso1-administrador-memoria/
+│   ├── simulador Best-Fit.psc
+│   ├── simulador Worst-Fit.psc
+│   └── README_caso1.md
+├── caso2-sistema-archivos/
+│   ├── MiniSistemaArchivosBPlus.psc
+│   └── README_caso2.md
+└── README.md
+```
 
 ---
 
+## Caso 1 — Administrador de Memoria con Particiones Variables
 
-## Conceptos clave
+Simulación conceptual de cómo un sistema operativo gestiona la memoria RAM mediante una **lista enlazada de particiones variables**. Se implementan y comparan tres algoritmos de asignación y se analiza el proceso de compactación.
 
-**✿ Particiones variables:** la memoria se divide dinámicamente según el tamaño real de cada proceso  
-**✿ Fragmentación externa:** espacios libres dispersos entre bloques ocupados que no pueden utilizarse de forma contigua  
-**✿ Coalescencia:** fusión automática de bloques libres adyacentes al liberar un proceso  
-**✿ Compactación:** reorganización de los bloques ocupados al inicio de la memoria para consolidar el espacio libre en un único bloque contiguo
+### Algoritmos implementados
 
+| Algoritmo | Criterio de selección | Complejidad |
+|---|---|---|
+| **First-Fit** | Primer bloque suficiente | O(1) mejor / O(n) promedio |
+| **Best-Fit** | Bloque más pequeño suficiente | O(n) siempre |
+| **Worst-Fit** | Bloque más grande disponible | O(n) siempre |
+| **Compactación** | Unificación de espacio libre | O(n + m) |
 
-## Contexto académico
+### Parámetros de la simulación
 
-Proyecto desarrollado para la materia de **Estructura de Datos**, el objetivo es comprender la gestión dinámica de memoria mediante listas enlazadas y analizar las ventajas y limitaciones de cada política de asignación.
+- Memoria total: **600 unidades**
+- Procesos: P1 (100), P2 (150), P3 (80), P4 (120), P5 (50), P6 (70)
+- Estructura base: lista enlazada de nodos `{inicio, tamaño, estado}`
+
+### Resultados clave
+
+- **First-Fit** es el más rápido por asignación pero acumula fragmentación externa más rápido.
+- **Best-Fit** minimiza el desperdicio inmediato pero genera residuos muy pequeños e inutilizables.
+- **Worst-Fit** preserva bloques de tamaño razonable para futuras asignaciones.
+- Los tres algoritmos son equivalentes en complejidad teórica O(n); su diferencia real está en el comportamiento de la fragmentación a largo plazo.
+- La compactación eliminó completamente la fragmentación externa (210 unidades dispersas → 1 bloque contiguo de 210), sin incrementar la memoria total disponible.
+
+---
+<br>
+
+## Caso 2 — Mini Sistema de Archivos Conceptual con Árbol B+
+
+Diseño e implementación conceptual de un mini sistema de archivos usando un **árbol B+ de orden 4** como estructura principal de indexación. Incluye simulación de inserción paso a paso, pseudocódigo de búsqueda, inserción y eliminación, y análisis de complejidad.
+
+### Configuración del árbol
+
+| Propiedad | Valor |
+|---|---|
+| Tipo | B+ |
+| Orden | 4 |
+| Máximo de claves por nodo | 3 |
+| Mínimo de claves por nodo | 1 |
+| Criterio de ordenamiento | Alfabético (lexicográfico) |
+| Datos almacenados en | Hojas únicamente |
+| Hojas enlazadas | Sí (recorrido secuencial) |
+
+### Operaciones implementadas
+
+- **Búsqueda** — descenso por nodos índice hasta la hoja correspondiente.
+- **Inserción** — inserción ordenada con Split y promoción de clave al padre ante desbordamiento.
+- **Eliminación** — extracción con manejo de underflow mediante redistribución (rotación) o fusión (Merge) de nodos hermanos.
+
+### Complejidad
+
+| Operación | Caso promedio | Peor caso |
+|---|---|---|
+| Búsqueda | O(log N) | O(log N) |
+| Inserción | O(log N) | O(log N) |
+| Eliminación | O(log N) | O(log N) |
+| Recorrido / Listado | O(N) | O(N) |
+| Búsqueda por rango | O(log N + k) | O(log N + k) |
+
+### Simulación — estado final (10 inserciones)
+
+```
+Raíz (índice): [ Fotos.png | Música | Tarea.pdf ]
+    │               │              │              │
+ Hoja 1          Hoja 2         Hoja 3          Hoja 4
+Backup.zip    Fotos.png      Música          Tarea.pdf
+Documentos    Imágenes       Notas.txt       Video.mp4
+                             Proyectos
+```
+
+Cadena secuencial de hojas:
+`Backup.zip → Documentos → Fotos.png → Imágenes → Música → Notas.txt → Proyectos → Tarea.pdf → Video.mp4`
+
+---
+
+## Relación entre los casos
+
+Ambos casos abordan el problema de la **gestión eficiente de recursos en sistemas operativos** desde ángulos complementarios:
+
+- El **Caso 1** gestiona *dónde* se ubican los procesos en memoria (espacio físico contiguo), usando una lista enlazada lineal. Su desafío principal es la fragmentación.
+- El **Caso 2** gestiona *cómo se indexan* los archivos en disco (espacio lógico jerárquico), usando un árbol B+. Su fortaleza es el acceso logarítmico con balance automático.
+
+La lista enlazada del Caso 1 opera en O(n) con degradación por fragmentación acumulada; el árbol B+ del Caso 2 mantiene O(log N) estable independientemente del patrón de operaciones. Juntos ilustran que la elección de estructura de datos determina directamente el rendimiento y la confiabilidad de un sistema operativo.
+
+---
+
+---
+
+*Universidad de El Salvador — Ciclo III 2025*
