@@ -32,7 +32,7 @@ Este repositorio contiene dos casos de estudio independientes desarrollados como
 
 ---
 
-## Caso 1 — Administrador de Memoria con Particiones Variables
+## Caso 1: Administrador de Memoria con Particiones Variables
 
 Simulación conceptual de cómo un sistema operativo gestiona la memoria RAM mediante una **lista enlazada de particiones variables**. Se implementan y comparan tres algoritmos de asignación y se analiza el proceso de compactación.
 
@@ -53,16 +53,16 @@ Simulación conceptual de cómo un sistema operativo gestiona la memoria RAM med
 
 ### Resultados clave
 
-- **First-Fit** es el más rápido por asignación pero acumula fragmentación externa más rápido.
-- **Best-Fit** minimiza el desperdicio inmediato pero genera residuos muy pequeños e inutilizables.
-- **Worst-Fit** preserva bloques de tamaño razonable para futuras asignaciones.
-- Los tres algoritmos son equivalentes en complejidad teórica O(n); su diferencia real está en el comportamiento de la fragmentación a largo plazo.
-- La compactación eliminó completamente la fragmentación externa (210 unidades dispersas → 1 bloque contiguo de 210), sin incrementar la memoria total disponible.
+✿ **First-Fit** es el más rápido por asignación pero acumula fragmentación externa más rápido  
+✿ **Best-Fit** minimiza el desperdicio inmediato pero genera residuos muy pequeños e inutilizables  
+✿ **Worst-Fit** preserva bloques de tamaño razonable para futuras asignaciones  
+✿ Los tres algoritmos son equivalentes en complejidad teórica O(n); su diferencia real está en el comportamiento de la fragmentación a largo plazo  
+✿ La compactación eliminó completamente la fragmentación externa (210 unidades dispersas → 1 bloque contiguo de 210), sin incrementar la memoria total disponible.
 
 ---
 <br>
 
-## Caso 2 — Mini Sistema de Archivos Conceptual con Árbol B+
+## Caso 2: Mini Sistema de Archivos Conceptual con Árbol B+
 
 Diseño e implementación conceptual de un mini sistema de archivos usando un **árbol B+ de orden 4** como estructura principal de indexación. Incluye simulación de inserción paso a paso, pseudocódigo de búsqueda, inserción y eliminación, y análisis de complejidad.
 
@@ -80,9 +80,9 @@ Diseño e implementación conceptual de un mini sistema de archivos usando un **
 
 ### Operaciones implementadas
 
-- **Búsqueda** — descenso por nodos índice hasta la hoja correspondiente.
-- **Inserción** — inserción ordenada con Split y promoción de clave al padre ante desbordamiento.
-- **Eliminación** — extracción con manejo de underflow mediante redistribución (rotación) o fusión (Merge) de nodos hermanos.
+✿ **Búsqueda** — descenso por nodos índice hasta la hoja correspondiente  
+✿ **Inserción** — inserción ordenada con Split y promoción de clave al padre ante desbordamiento  
+✿ **Eliminación** — extracción con manejo de underflow mediante redistribución (rotación) o fusión (Merge) de nodos hermanos.
 
 ### Complejidad
 
@@ -121,6 +121,3 @@ La lista enlazada del Caso 1 opera en O(n) con degradación por fragmentación a
 
 ---
 
----
-
-*Universidad de El Salvador — Ciclo III 2025*
